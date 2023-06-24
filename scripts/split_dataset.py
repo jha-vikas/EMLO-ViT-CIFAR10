@@ -23,7 +23,7 @@ def split_data(src_dir, train_dir, test_dir, split):
     train_dir.mkdir(parents=True, exist_ok=True)
     test_dir.mkdir(parents=True, exist_ok=True)
     
-    for subdir in src_dir.iterdir():
+    for subdir in src_dir.iterdir():  
         if not subdir.is_dir():  # Skip if not a directory
             continue
         

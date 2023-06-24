@@ -16,6 +16,7 @@ setup(
         "console_scripts": [
             "gold_train = gold.train:main",
             "gold_eval = gold.eval:main",
+            "gold_infer = gold.infer:main"
         ]
     },
 )
