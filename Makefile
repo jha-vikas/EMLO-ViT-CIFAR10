@@ -12,3 +12,5 @@ format:
 	@echo -n "==> Checking that code is autoformatted with black..."
 	@black --check --quiet .
 	@echo -e "$(OK_MSG)"
+
+	

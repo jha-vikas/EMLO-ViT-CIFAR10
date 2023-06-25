@@ -1,4 +1,4 @@
-# timm model based CIFAR10 trainer
+# ViT based image classification model
 
 ### To run the model
 Steps:
@@ -31,6 +31,46 @@ gold_eval ckpt_fol=<location of checkpoint folder>
     ```
     gold_train <parameter in train.yaml> = <new parameter value>
     ``` 
+
+5. To run inference:
+
+```
+gold_infer ckpt_fol=<location of checkpoint folder> img_path=<image file location>
+```
+
+
+6. To add data to dvc:
+    - In case dvc is not instantiated, run:
+    ```
+    dvc init
+    ```
+    - Add remote to dvc
+    ```
+    dvc remote add --default <remote name> <remote location>
+    ```
+    Eg:- If local folder has to be added as remote, naming remote as 'local':
+    ```
+    dvc remote add -d local <location of local folder for dvc>
+    ```
+    Note: add '--default' to make it default dvc remote location. Other than local folder, google drive, amazon s3, MS-azuer blob storage, ssh, GCP, HDFS, & HTTP can be used as remote for dvc.
+    - Add data files to be tracked by dvc:
+    ```
+    dvc add data
+    dvc add outputs
+    ```
+    - Add dvc to gitignore:
+    ```
+    git add data.dvc .gitignore
+    ```
+    - Push dvc to the remote location:
+    ```
+    dvc pull -r <dvc remote name>
+    ```
+    - To move to specific file revision:
+    ```
+    git checkout <...>
+    dvc checkout
+    ```
 
 ### Docker
 
