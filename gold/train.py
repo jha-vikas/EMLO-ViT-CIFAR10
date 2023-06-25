@@ -34,10 +34,9 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
         "model": model,
         "trainer": trainer,
     }
-    
+
     if cfg.get("compile"):
         model = torch.compile(model)
-
 
     ckpt_path = None
     ckpt_fol = cfg.get("ckpt_fol")
@@ -46,7 +45,6 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
             ckpt_path = max(Path(ckpt_fol).rglob("*.ckpt"), key=os.path.getctime)
         except:
             print("No checkpoint found. Continuing with default staring weights.")
-           
 
     if cfg.get("train"):
         log.info("Starting training!")
@@ -74,7 +72,7 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
 @hydra.main(version_base="1.3", config_path="../configs", config_name="train.yaml")
 def main(cfg: DictConfig):
     # train the model
-    #print(cfg)
+    # print(cfg)
     metric_dict, _ = train(cfg)
 
     # this will be used by hydra later for optimization

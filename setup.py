@@ -8,7 +8,7 @@ setup(
     description="PyTorch Lightning Project Setup",
     author="",
     author_email="",
-    #url="https://github.com/user/project",
+    # url="https://github.com/user/project",
     install_requires=["lightning", "hydra-core"],
     packages=find_packages(),
     # use this to customize global commands available in the terminal after installing the package
@@ -16,7 +16,7 @@ setup(
         "console_scripts": [
             "gold_train = gold.train:main",
             "gold_eval = gold.eval:main",
-            "gold_infer = gold.infer:main"
+            "gold_infer = gold.infer:main",
         ]
     },
 )

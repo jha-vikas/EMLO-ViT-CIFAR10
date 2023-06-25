@@ -2,10 +2,10 @@ from typing import Tuple, Dict
 
 import lightning as L
 import torch
-import hydra                                            
+import hydra
 from omegaconf import DictConfig
 
-                                                                                    
+
 from gold import utils
 
 from pathlib import Path
@@ -16,8 +16,7 @@ log = utils.get_pylogger(__name__)
 
 @utils.task_wrapper
 def evaluate(cfg: DictConfig) -> Tuple[dict, dict]:
-
-    #print(cfg.ckpt_path)
+    # print(cfg.ckpt_path)
     assert cfg.ckpt_fol
 
     log.info(f"Instantiating datamodule <{cfg.data._target_}>")
@@ -38,25 +37,24 @@ def evaluate(cfg: DictConfig) -> Tuple[dict, dict]:
 
     if cfg.get("compile"):
         model = torch.compile(model)
-                                                                 
+
     ckpt_fol = cfg.get("ckpt_fol")
-    #print(f"-------------------------{ckpt_fol}--------------")
-    #print(f'==========={max(Path(ckpt_fol).glob("*.ckpt"), key=os.path.getctime)}============')
-    #print(type(cfg))
+    # print(f"-------------------------{ckpt_fol}--------------")
+    # print(f'==========={max(Path(ckpt_fol).glob("*.ckpt"), key=os.path.getctime)}============')
+    # print(type(cfg))
     if ckpt_fol:
         try:
             ckpt_path = max(Path(ckpt_fol).rglob("*.ckpt"), key=os.path.getctime)
             print(f"Using checkpoint: {ckpt_path}")
-        #print(f"------------{ckpt_path}-----------")
+        # print(f"------------{ckpt_path}-----------")
         except:
             raise FileNotFoundError("Checkpoint does not exist")
-
 
     trainer.test(model=model, datamodule=datamodule, ckpt_path=ckpt_path)
 
     metric_dict = trainer.callback_metrics
 
-    #metric_dict = {**train_metrics, **test_metrics}
+    # metric_dict = {**train_metrics, **test_metrics}
 
     return metric_dict, object_dict
 
