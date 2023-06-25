@@ -1,0 +1,9 @@
+README.md
+setup.py
+configs/__init__.py
+gold.egg-info/PKG-INFO
+gold.egg-info/SOURCES.txt
+gold.egg-info/dependency_links.txt
+gold.egg-info/entry_points.txt
+gold.egg-info/requires.txt
+gold.egg-info/top_level.txt
